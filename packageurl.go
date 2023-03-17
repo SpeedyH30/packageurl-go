@@ -292,6 +292,11 @@ func FromString(purl string) (PackageURL, error) {
 	remainder = nextSplit[1]
 
 	index = strings.LastIndex(remainder, "/")
+	vers := ""
+	if purlType == "github" {
+		vindex := strings.Index(remainder, "@")
+		vers = (remainder[vindex+1:])
+	}
 	name := typeAdjustName(purlType, remainder[index+1:])
 	version := ""
 
@@ -300,6 +305,11 @@ func FromString(purl string) (PackageURL, error) {
 		v, err := url.PathUnescape(name[atIndex+1:])
 		if err != nil {
 			return PackageURL{}, fmt.Errorf("failed to unescape purl version: %s", err)
+		}
+		if purlType == "github" {
+			version = vers
+		} else {
+			version = v
 		}
 		version = v
 		name, err = url.PathUnescape(name[:atIndex])
