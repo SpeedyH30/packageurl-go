@@ -311,7 +311,6 @@ func FromString(purl string) (PackageURL, error) {
 		} else {
 			version = v
 		}
-		version = v
 		name, err = url.PathUnescape(name[:atIndex])
 		if err != nil {
 			return PackageURL{}, fmt.Errorf("failed to unescape purl name: %s", err)
