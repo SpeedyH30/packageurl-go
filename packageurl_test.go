@@ -30,7 +30,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/anchore/packageurl-go"
+	"github.com/speedyh30/packageurl-go"
 )
 
 type TestFixture struct {
